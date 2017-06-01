@@ -77,7 +77,7 @@ public class DB {
             db.put(Integer.toString(id), this);
         }
 
-        public static <T> T get(int id, Class<T> t) {
+        protected static <T> T get(int id, Class<T> t) {
             DB db = DB.getInstance();
             return db.get(Integer.toString(id), t);
         }
