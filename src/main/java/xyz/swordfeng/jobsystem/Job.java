@@ -16,9 +16,16 @@ public final class Job extends DB.PersistentData {
     private String[] skills;
     private String education;
 
+    public static final int CHECKING = 0;
+    public static final int PASS = 1;
+    public static final int FAIL = 2;
+
+    public int state;
+
     public Job(User user, String name, String address, int requiredNumOfPeople, String[] skills, String education) throws ValidationError {
         super();
         this.username = user.username;
+        this.state = CHECKING;
         setName(name);
         setAddress(address);
         setRequiredNumOfPeople(requiredNumOfPeople);
