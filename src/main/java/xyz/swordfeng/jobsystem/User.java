@@ -1,7 +1,6 @@
 package xyz.swordfeng.jobsystem;
 
 import com.sun.istack.internal.NotNull;
-import org.rocksdb.RocksDBException;
 
 import java.io.Serializable;
 
