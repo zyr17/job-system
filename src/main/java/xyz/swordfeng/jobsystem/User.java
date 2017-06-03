@@ -31,7 +31,7 @@ public final class User implements Serializable {
         }
         return user;
     }
-    public static @NotNull User register(@NotNull String username, @NotNull String password, @NotNull int money) throws UserExist, MoneyBelowZero {
+    public static @NotNull User register(@NotNull String username, @NotNull String password, int money) throws UserExist, MoneyBelowZero {
         User user = new User(username, password, money);
         user.password = password;
         synchronized (User.class) {
@@ -44,7 +44,7 @@ public final class User implements Serializable {
         return user;
     }
 
-    private User(@NotNull String username, @NotNull String password, @NotNull int money) throws MoneyBelowZero {
+    private User(@NotNull String username, @NotNull String password, int money) throws MoneyBelowZero {
         this.username = username;
         this.password = password;
         if (money < 0) {
