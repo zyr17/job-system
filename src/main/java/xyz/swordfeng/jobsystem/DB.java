@@ -78,6 +78,17 @@ public class DB {
         }
     }
 
+    public <T> void delete(@NotNull String key, Class<T> t) {
+        try {
+            String type = t.getName();
+            byte[] k = (type + "/" + key).getBytes();
+            db.delete(k);
+        } catch (RocksDBException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
+    }
+
     public static class PersistentData implements Serializable {
         public final int id;
         public PersistentData() {
@@ -95,6 +106,16 @@ public class DB {
         public void save() {
             DB db = DB.getInstance();
             db.put(Integer.toString(id), this);
+        }
+
+        protected static <T> int getNextId(Class<T> t) {
+            DB db = DB.getInstance();
+            String idName = t.getName() + "/Id";
+            Integer i = db.get(idName, Integer.class);
+            if (i == null) {
+                i = 0;
+            }
+            return i;
         }
 
         protected static <T> T get(int id, Class<T> t) {

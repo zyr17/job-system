@@ -2,8 +2,7 @@ package xyz.swordfeng.jobsystem;
 
 public class JobChecker {
     public static Job getCheckingJob(){
-        DB db = DB.getInstance();
-        int totalJobNum = db.get(Job.class.getName() + "/Id", Integer.class);
+        int totalJobNum = Job.getNextId();
         for (int i = 0; i < totalJobNum; i ++ ){
             Job job = Job.get(i);
             if (job.state == Job.CHECKING)
@@ -12,8 +11,7 @@ public class JobChecker {
         return null;
     }
     public static boolean checkingJobPassed(boolean passed){
-        DB db = DB.getInstance();
-        int totalJobNum = db.get(Job.class.getName() + "/Id", Integer.class);
+        int totalJobNum = Job.getNextId();
         for (int i = 0; i < totalJobNum; i ++ ){
             Job job = Job.get(i);
             if (job.state == Job.CHECKING){

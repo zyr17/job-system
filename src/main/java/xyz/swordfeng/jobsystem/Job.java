@@ -116,6 +116,7 @@ public final class Job extends DB.PersistentData {
     public static Job get(int id) {
         return get(id, Job.class);
     }
+    public static int getNextId() { return getNextId(Job.class); }
     @Override
     public void save() {
         super.save();
