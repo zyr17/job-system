@@ -19,6 +19,11 @@ public final class User implements Serializable {
             super("User has already existed");
         }
     }
+    public static class MoneyBelowZero extends Exception {
+        public MoneyBelowZero() {
+            super("Input money is lower than zero");
+        }
+    }
     public static @NotNull User login(@NotNull String username, @NotNull String password) throws AuthFailure {
         User user = DB.getInstance().get(username, User.class);
         if (user == null || !password.equals(user.password)) {
@@ -26,8 +31,8 @@ public final class User implements Serializable {
         }
         return user;
     }
-    public static @NotNull User register(@NotNull String username, @NotNull String password) throws UserExist {
-        User user = new User(username, password);
+    public static @NotNull User register(@NotNull String username, @NotNull String password, @NotNull int money) throws UserExist, MoneyBelowZero {
+        User user = new User(username, password, money);
         user.password = password;
         synchronized (User.class) {
             if (DB.getInstance().get(username, User.class) == null) {
@@ -39,11 +44,24 @@ public final class User implements Serializable {
         return user;
     }
 
-    private User(@NotNull String username, @NotNull String password) {
+    private User(@NotNull String username, @NotNull String password, @NotNull int money) throws MoneyBelowZero {
         this.username = username;
         this.password = password;
+        if (money < 0) {
+            throw new MoneyBelowZero();
+        }
+        else if (money < 100) {
+            vipLevel = 0;
+        }
+        else if (money < 10000) {
+            vipLevel = 1;
+        }
+        else {
+            vipLevel = 2;
+        }
     }
 
     public final String username;
     private String password;
+    public final int vipLevel;
 }
