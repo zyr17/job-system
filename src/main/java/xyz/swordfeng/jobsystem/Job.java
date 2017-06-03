@@ -80,9 +80,23 @@ public final class Job extends DB.PersistentData {
         if (skills == null) {
             throw new ValidationError("Null skills");
         }
-        for (String skill: skills) {
+        if (skills.length == 0) {
+            throw new ValidationError("Zero length skills");
+        }
+        if (skills.length == 1) {
+            if (skills[0] == null) {
+                throw new ValidationError("Null skill");
+            }
+            else if (skills[0].length() > 20) {
+                throw new ValidationError("Skill name too long");
+            }
+        }
+        else for (String skill: skills) {
             if (skill == null) {
                 throw new ValidationError("Null skill");
+            }
+            else if (skill.length() == 0) {
+                throw new ValidationError("Contain empty skill with non-empty skills");
             }
             if (skill.length() > 20) {
                 throw new ValidationError("Skill name too long");
