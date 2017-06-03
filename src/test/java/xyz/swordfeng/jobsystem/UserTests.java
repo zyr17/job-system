@@ -11,19 +11,21 @@ public class UserTests {
     public void initialize() {
         DB.getInstance().reset();
         try {
-            User.register("user1", "password");
+            User.register("user1", "password", 0);
         } catch (User.UserExist userExist) {
             userExist.printStackTrace();
+        } catch (User.MoneyBelowZero moneyBelowZero) {
+            moneyBelowZero.printStackTrace();
         }
     }
     @Test
-    public void createUser() throws User.UserExist {
-        User user = User.register("user2", "password2");
+    public void createUser() throws User.UserExist, User.MoneyBelowZero {
+        User user = User.register("user2", "password2", 0);
         assertTrue("Create a user", "user2".equals(user.username));
     }
     @Test(expected = User.UserExist.class)
-    public void createExistingUser() throws User.UserExist {
-        User.register("user1", "xyz");
+    public void createExistingUser() throws User.UserExist, User.MoneyBelowZero {
+        User.register("user1", "xyz", 0);
         fail("should throw UserExist exception");
     }
     @Test
