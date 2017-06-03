@@ -5,6 +5,7 @@ public class JobChecker {
         int totalJobNum = Job.getNextId();
         for (int i = 0; i < totalJobNum; i ++ ){
             Job job = Job.get(i);
+            if (job == null) continue;
             if (job.state == Job.CHECKING)
                 return job;
         }
@@ -14,6 +15,7 @@ public class JobChecker {
         int totalJobNum = Job.getNextId();
         for (int i = 0; i < totalJobNum; i ++ ){
             Job job = Job.get(i);
+            if (job == null) continue;
             if (job.state == Job.CHECKING){
                 if (passed)
                     job.state = Job.PASS;
