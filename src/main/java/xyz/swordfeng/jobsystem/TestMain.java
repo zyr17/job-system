@@ -4,6 +4,7 @@ import org.rocksdb.RocksDBException;
 
 public class TestMain {
     public static void main(String[] args) throws User.AuthFailure, User.UserExist {
+        DB.getInstance().reset();
         User u = User.register("swordfeng", "123456");
         User p = User.login("swordfeng", "123456");
         try {

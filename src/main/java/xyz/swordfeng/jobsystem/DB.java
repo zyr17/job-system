@@ -2,10 +2,13 @@ package xyz.swordfeng.jobsystem;
 
 import com.sun.istack.internal.NotNull;
 import org.apache.commons.lang3.SerializationUtils;
+import org.apache.commons.io.FileUtils;
 import org.rocksdb.Options;
 import org.rocksdb.RocksDB;
 import org.rocksdb.RocksDBException;
 
+import java.io.File;
+import java.io.IOException;
 import java.io.Serializable;
 
 /**
@@ -21,9 +24,26 @@ public class DB {
     }
 
     private RocksDB db;
+    private Options options;
     private DB() {
         RocksDB.loadLibrary();
-        Options options = new Options().setCreateIfMissing(true);
+        options = new Options().setCreateIfMissing(true);
+        try {
+            db = RocksDB.open(options, "data.db");
+        } catch (RocksDBException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
+    }
+
+    public void reset() {
+        db.close();
+        try {
+            FileUtils.deleteDirectory(new File("data.db"));
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
         try {
             db = RocksDB.open(options, "data.db");
         } catch (RocksDBException e) {
