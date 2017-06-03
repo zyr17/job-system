@@ -14,7 +14,7 @@ public class PersistentQueue<T> {
     public void add(T v) {
         synchronized (PersistentQueue.class) {
             DB db = DB.getInstance();
-            LinkedList<T> q = db.get("Persistent/" + name, LinkedList.class);
+            LinkedList<T> q = db.get(PersistentQueue.class.getName() + "/" + name, LinkedList.class);
             if (q == null) q = new LinkedList<>();
             q.add(v);
             db.put("Persistent/" + name, q);
@@ -22,7 +22,7 @@ public class PersistentQueue<T> {
     }
     public T poll() {
         DB db = DB.getInstance();
-        LinkedList<T> q = db.get("Persistent/" + name, LinkedList.class);
+        LinkedList<T> q = db.get(PersistentQueue.class.getName() + "/" + name, LinkedList.class);
         if (q == null) q = new LinkedList<>();
         T result = q.poll();
         db.put("Persistent/" + name, q);
@@ -30,7 +30,7 @@ public class PersistentQueue<T> {
     }
     public List<T> getList() {
         DB db = DB.getInstance();
-        LinkedList<T> q = db.get("Persistent/" + name, LinkedList.class);
+        LinkedList<T> q = db.get(PersistentQueue.class.getName() + "/" + name, LinkedList.class);
         if (q == null) q = new LinkedList<>();
         return q;
     }
