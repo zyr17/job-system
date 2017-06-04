@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 public class UserTests {
     @Before
@@ -26,12 +25,10 @@ public class UserTests {
     @Test(expected = User.UserExist.class)
     public void createExistingUser() throws User.UserExist, User.MoneyBelowZero {
         User.register("user1", "xyz", 0);
-        fail("should throw UserExist exception");
     }
     @Test(expected = User.MoneyBelowZero.class)
     public void negativeMoney() throws User.UserExist, User.MoneyBelowZero {
         User.register("user2", "password2", -1);
-        fail("should throw MoneyBelowZero exception");
     }
 
     @Test
@@ -42,12 +39,10 @@ public class UserTests {
     @Test(expected = User.AuthFailure.class)
     public void loginWrongPassword() throws User.AuthFailure {
         User user = User.login("user1", "xyz");
-        fail("should throw AuthFailure exception");
     }
     @Test(expected = User.AuthFailure.class)
     public void loginNonexistUser() throws User.AuthFailure {
         User user = User.login("user2", "password2");
-        fail("should throw AuthFailure exception");
     }
 
     @Test

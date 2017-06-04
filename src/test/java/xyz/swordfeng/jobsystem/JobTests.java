@@ -86,7 +86,6 @@ public class JobTests {
         skills[1] = "Steam";
         String education = "大学";
         Job job = new Job(user, name, address, 10, skills, education);
-        fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
     public void createJobWithZeroPerson() throws ValidationError, User.AuthFailure {
