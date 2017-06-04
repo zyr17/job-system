@@ -24,7 +24,7 @@ public class JobCheckerTests {
         String[] skills = new String[2];
         skills[0] = "Java";
         skills[1] = "Steam";
-        String education = "大学";
+        String education = "College";
         Job job1 = new Job(user, name, address, 11, skills, education);
         job1.save();
         Job job2 = new Job(user, name + "2", address + "2", 12, skills, education);
