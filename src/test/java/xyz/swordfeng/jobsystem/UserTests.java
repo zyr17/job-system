@@ -28,6 +28,12 @@ public class UserTests {
         User.register("user1", "xyz", 0);
         fail("should throw UserExist exception");
     }
+    @Test(expected = User.MoneyBelowZero.class)
+    public void negativeMoney() throws User.UserExist, User.MoneyBelowZero {
+        User.register("user2", "password2", -1);
+        fail("should throw MoneyBelowZero exception");
+    }
+
     @Test
     public void login() throws User.AuthFailure {
         User user = User.login("user1", "password");
@@ -37,5 +43,36 @@ public class UserTests {
     public void loginWrongPassword() throws User.AuthFailure {
         User user = User.login("user1", "xyz");
         fail("should throw AuthFailure exception");
+    }
+    @Test(expected = User.AuthFailure.class)
+    public void loginNonexistUser() throws User.AuthFailure {
+        User user = User.login("user2", "password2");
+        fail("should throw AuthFailure exception");
+    }
+
+    @Test
+    public void registerWithMoney0() throws User.UserExist, User.MoneyBelowZero {
+        User user = User.register("user2", "password2", 0);
+        assertTrue("Create a vip0 user", user.vipLevel == 0);
+    }
+    @Test
+    public void registerWithMoney99() throws User.UserExist, User.MoneyBelowZero {
+        User user = User.register("user2", "password2", 99);
+        assertTrue("Create a vip0 user", user.vipLevel == 0);
+    }
+    @Test
+    public void registerWithMoney100() throws User.UserExist, User.MoneyBelowZero {
+        User user = User.register("user2", "password2", 100);
+        assertTrue("Create a vip0 user", user.vipLevel == 1);
+    }
+    @Test
+    public void registerWithMoney9999() throws User.UserExist, User.MoneyBelowZero {
+        User user = User.register("user2", "password2", 9999);
+        assertTrue("Create a vip0 user", user.vipLevel == 1);
+    }
+    @Test
+    public void registerWithMoney10000() throws User.UserExist, User.MoneyBelowZero {
+        User user = User.register("user2", "password2", 10000);
+        assertTrue("Create a vip0 user", user.vipLevel == 2);
     }
 }
