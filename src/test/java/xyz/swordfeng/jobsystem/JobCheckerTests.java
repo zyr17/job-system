@@ -8,7 +8,7 @@ import static org.junit.Assert.fail;
 
 public class JobCheckerTests {
     @Before
-    public void initialize() {
+    public void initialize() throws User.AuthFailure, ValidationError {
         DB.getInstance().reset();
         try {
             User.register("user1", "password", 0);

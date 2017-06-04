@@ -21,7 +21,7 @@ public class JobTests {
         }
     }
     @Test
-    public void createJob() throws ValidationError {
+    public void createJob() throws ValidationError, User.AuthFailure {
         String username = "user1";
         User user = User.login(username, "password");
         String name = "Programmer";
@@ -37,7 +37,7 @@ public class JobTests {
                     Arrays.equals(job.getSkills(), skills) && job.getEducation().equals(education));
     }
     @Test(expected = ValidationError.class)
-    public void createJobWithNullName() throws ValidationError {
+    public void createJobWithNullName() throws ValidationError, User.AuthFailure {
         String username = "user1";
         User user = User.login(username, "password");
         String name = null;
@@ -50,7 +50,7 @@ public class JobTests {
         fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
-    public void createJobWithTooLongName() throws ValidationError {
+    public void createJobWithTooLongName() throws ValidationError, User.AuthFailure {
         String username = "user1";
         User user = User.login(username, "password");
         String name = "averyveryveryverylongname";
@@ -63,7 +63,7 @@ public class JobTests {
         fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
-    public void createJobWithNullAddress() throws ValidationError {
+    public void createJobWithNullAddress() throws ValidationError, User.AuthFailure {
         String username = "user1";
         User user = User.login(username, "password");
         String name = "Programmer";
@@ -76,7 +76,7 @@ public class JobTests {
         fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
-    public void createJobWithTooLongAddress() throws ValidationError {
+    public void createJobWithTooLongAddress() throws ValidationError, User.AuthFailure {
         String username = "user1";
         User user = User.login(username, "password");
         String name = "Programmer";
@@ -89,7 +89,7 @@ public class JobTests {
         fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
-    public void createJobWithZeroPerson() throws ValidationError {
+    public void createJobWithZeroPerson() throws ValidationError, User.AuthFailure {
         String username = "user1";
         User user = User.login(username, "password");
         String name = "Programmer";
@@ -102,7 +102,7 @@ public class JobTests {
         fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
-    public void createJobWithNegativePerson() throws ValidationError {
+    public void createJobWithNegativePerson() throws ValidationError, User.AuthFailure {
         String username = "user1";
         User user = User.login(username, "password");
         String name = "Programmer";
@@ -115,7 +115,7 @@ public class JobTests {
         fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
-    public void createJobWithZeroSkills() throws ValidationError {
+    public void createJobWithZeroSkills() throws ValidationError, User.AuthFailure {
         String username = "user1";
         User user = User.login(username, "password");
         String name = "Programmer";
@@ -126,7 +126,7 @@ public class JobTests {
         fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
-    public void createJobWithNullSkills() throws ValidationError {
+    public void createJobWithNullSkills() throws ValidationError, User.AuthFailure {
         String username = "user1";
         User user = User.login(username, "password");
         String name = "Programmer";
@@ -137,7 +137,7 @@ public class JobTests {
         fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
-    public void createJobWithNullSkill() throws ValidationError {
+    public void createJobWithNullSkill() throws ValidationError, User.AuthFailure {
         String username = "user1";
         User user = User.login(username, "password");
         String name = "Programmer";
@@ -150,7 +150,7 @@ public class JobTests {
         fail("should throw ValidationError exception");
     }
     @Test
-    public void createJobWithZeroSkill() throws ValidationError {
+    public void createJobWithZeroSkill() throws ValidationError, User.AuthFailure {
         String username = "user1";
         User user = User.login(username, "password");
         String name = "Programmer";
@@ -162,7 +162,7 @@ public class JobTests {
         fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
-    public void createJobWithOneEmptySkill() throws ValidationError {
+    public void createJobWithOneEmptySkill() throws ValidationError, User.AuthFailure {
         String username = "user1";
         User user = User.login(username, "password");
         String name = "Programmer";
@@ -175,7 +175,7 @@ public class JobTests {
         fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
-    public void createJobWithTooLongSkill() throws ValidationError {
+    public void createJobWithTooLongSkill() throws ValidationError, User.AuthFailure {
         String username = "user1";
         User user = User.login(username, "password");
         String name = "Programmer";
@@ -187,7 +187,7 @@ public class JobTests {
         fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
-    public void createJobWithIncorrectEducation() throws ValidationError {
+    public void createJobWithIncorrectEducation() throws ValidationError, User.AuthFailure {
         String username = "user1";
         User user = User.login(username, "password");
         String name = "Programmer";

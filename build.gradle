@@ -22,6 +22,9 @@ repositories {
 dependencies {
     // The production code uses the SLF4J logging API at compile time
     compile 'org.slf4j:slf4j-api:1.7.22'
+    // annotations?
+    // https://mvnrepository.com/artifact/javax.validation/validation-api
+    compile group: 'javax.validation', name: 'validation-api', version: '2.0.0.Beta2'
 
     compile 'org.rocksdb:rocksdbjni:5.4.5'
     compile 'org.apache.commons:commons-lang3:3.5'
