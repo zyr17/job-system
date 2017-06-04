@@ -31,7 +31,6 @@ public class JobTests {
         skills[1] = "Steam";
         String education = "大学";
         Job job = new Job(user, name, address, 10, skills, education);
-        //TODO I don't know whether we can use Arrays.equals to compare two String arrays
         assertTrue("Create a job", username.equals(job.username) && job.getName().equals(name) &&
                     job.getAddress().equals(address) && job.getRequiredNumOfPeople() == 10 &&
                     Arrays.equals(job.getSkills(), skills) && job.getEducation().equals(education));
@@ -47,7 +46,6 @@ public class JobTests {
         skills[1] = "Steam";
         String education = "大学";
         Job job = new Job(user, name, address, 10, skills, education);
-        fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
     public void createJobWithTooLongName() throws ValidationError, User.AuthFailure {
@@ -60,7 +58,6 @@ public class JobTests {
         skills[1] = "Steam";
         String education = "大学";
         Job job = new Job(user, name, address, 10, skills, education);
-        fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
     public void createJobWithNullAddress() throws ValidationError, User.AuthFailure {
@@ -73,7 +70,6 @@ public class JobTests {
         skills[1] = "Steam";
         String education = "大学";
         Job job = new Job(user, name, address, 10, skills, education);
-        fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
     public void createJobWithTooLongAddress() throws ValidationError, User.AuthFailure {
@@ -98,7 +94,6 @@ public class JobTests {
         skills[1] = "Steam";
         String education = "大学";
         Job job = new Job(user, name, address, 0, skills, education);
-        fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
     public void createJobWithNegativePerson() throws ValidationError, User.AuthFailure {
@@ -111,7 +106,6 @@ public class JobTests {
         skills[1] = "Steam";
         String education = "大学";
         Job job = new Job(user, name, address, -1, skills, education);
-        fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
     public void createJobWithZeroSkills() throws ValidationError, User.AuthFailure {
@@ -122,7 +116,6 @@ public class JobTests {
         String[] skills = new String[0];
         String education = "大学";
         Job job = new Job(user, name, address, 10, skills, education);
-        fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
     public void createJobWithNullSkills() throws ValidationError, User.AuthFailure {
@@ -133,7 +126,6 @@ public class JobTests {
         String[] skills = null;
         String education = "大学";
         Job job = new Job(user, name, address, 10, skills, education);
-        fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
     public void createJobWithNullSkill() throws ValidationError, User.AuthFailure {
@@ -146,7 +138,6 @@ public class JobTests {
         skills[1] = null;
         String education = "大学";
         Job job = new Job(user, name, address, 10, skills, education);
-        fail("should throw ValidationError exception");
     }
     @Test
     public void createJobWithZeroSkill() throws ValidationError, User.AuthFailure {
@@ -158,7 +149,6 @@ public class JobTests {
         skills[0] = "";
         String education = "大学";
         Job job = new Job(user, name, address, 10, skills, education);
-        fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
     public void createJobWithOneEmptySkill() throws ValidationError, User.AuthFailure {
@@ -171,7 +161,6 @@ public class JobTests {
         skills[1] = "";
         String education = "大学";
         Job job = new Job(user, name, address, 10, skills, education);
-        fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
     public void createJobWithTooLongSkill() throws ValidationError, User.AuthFailure {
@@ -183,7 +172,6 @@ public class JobTests {
         skills[0] = "averyveryveryverylongskill";
         String education = "大学";
         Job job = new Job(user, name, address, 10, skills, education);
-        fail("should throw ValidationError exception");
     }
     @Test(expected = ValidationError.class)
     public void createJobWithIncorrectEducation() throws ValidationError, User.AuthFailure {
@@ -195,6 +183,5 @@ public class JobTests {
         skills[0] = "Java";
         String education = "幼儿园";
         Job job = new Job(user, name, address, 10, skills, education);
-        fail("should throw ValidationError exception");
     }
 }

@@ -26,8 +26,11 @@ public class JobCheckerTests {
         skills[1] = "Steam";
         String education = "大学";
         Job job1 = new Job(user, name, address, 11, skills, education);
+        job1.save();
         Job job2 = new Job(user, name + "2", address + "2", 12, skills, education);
+        job2.save();
         Job job3 = new Job(user, name + "3", address + "3", 13, skills, education);
+        job3.save();
         JobChecker.checkingJobPassed(true);
     }
     @Test
