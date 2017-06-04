@@ -55,7 +55,7 @@ public final class Job extends DB.PersistentData {
         if (address == null) {
             throw new ValidationError("Null address");
         }
-        if (name.length() >= 200) {
+        if (address.length() >= 200) {
             throw new ValidationError("Address too long");
         }
         this.address = address;
