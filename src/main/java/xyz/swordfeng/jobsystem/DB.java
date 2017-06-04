@@ -4,9 +4,8 @@ import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.io.FileUtils;
-import org.rocksdb.Options;
-import org.rocksdb.RocksDB;
-import org.rocksdb.RocksDBException;
+import org.iq80.leveldb.*;
+import static org.fusesource.leveldbjni.JniDBFactory.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,70 +23,48 @@ public class DB {
         return _instance;
     }
 
-    private RocksDB db;
+    private org.iq80.leveldb.DB db;
     private Options options;
     private DB() {
-        RocksDB.loadLibrary();
-        options = new Options().setCreateIfMissing(true);
+        options = new Options().createIfMissing(true);
         try {
-            db = RocksDB.open(options, "data.db");
-        } catch (RocksDBException e) {
+            db = factory.open(new File("data.db"), options);
+        } catch (IOException e) {
             e.printStackTrace();
             System.exit(-1);
         }
     }
 
     public void reset() {
-        db.close();
         try {
+            db.close();
             FileUtils.deleteDirectory(new File("data.db"));
+            db = factory.open(new File("data.db"), options);
         } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(-1);
-        }
-        try {
-            db = RocksDB.open(options, "data.db");
-        } catch (RocksDBException e) {
             e.printStackTrace();
             System.exit(-1);
         }
     }
 
     public <T> T get(@NotNull String key, Class<T> t) {
-        try {
-            String type = t.getName();
-            byte[] k = (type + "/" + key).getBytes();
-            byte[] v = db.get(k);
-            if (v == null) return null;
-            return SerializationUtils.deserialize(v);
-        } catch (RocksDBException e) {
-            e.printStackTrace();
-            System.exit(-1);
-            return null;
-        }
+        String type = t.getName();
+        byte[] k = (type + "/" + key).getBytes();
+        byte[] v = db.get(k);
+        if (v == null) return null;
+        return SerializationUtils.deserialize(v);
     }
 
     public void put(@NotNull String key, @NotNull Serializable value) {
         String type = value.getClass().getName();
         byte[] k = (type + "/" + key).getBytes();
         byte[] v = SerializationUtils.serialize(value);
-        try {
-            db.put(k, v);
-        } catch (RocksDBException e) {
-            e.printStackTrace();
-            System.exit(-1);
-        }
+        db.put(k, v);
     }
 
     public <T> void delete(@NotNull String key, Class<T> t) {
-        try {
-            String type = t.getName();
-            byte[] k = (type + "/" + key).getBytes();
-            db.delete(k);
-        } catch (RocksDBException e) {
-            e.printStackTrace();
-            System.exit(-1);
-        }
+        String type = t.getName();
+        byte[] k = (type + "/" + key).getBytes();
+        db.delete(k);
     }
 
     public static class PersistentData implements Serializable {

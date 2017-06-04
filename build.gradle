@@ -26,9 +26,11 @@ dependencies {
     // https://mvnrepository.com/artifact/javax.validation/validation-api
     compile group: 'javax.validation', name: 'validation-api', version: '2.0.0.Beta2'
 
-    compile 'org.rocksdb:rocksdbjni:5.4.5'
+    //compile 'org.rocksdb:rocksdbjni:5.4.5'
     compile 'org.apache.commons:commons-lang3:3.5'
     compile 'commons-io:commons-io:2.5'
+
+    compile 'org.fusesource.leveldbjni:leveldbjni-all:1.8'
 
     compile 'org.nanohttpd:nanohttpd:2.2.0'
 
