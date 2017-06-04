@@ -1,6 +1,7 @@
 package xyz.swordfeng.jobsystem;
 
-import com.sun.istack.internal.NotNull;
+import javax.validation.constraints.NotNull;
+
 import org.apache.commons.lang3.SerializationUtils;
 import org.apache.commons.io.FileUtils;
 import org.rocksdb.Options;
