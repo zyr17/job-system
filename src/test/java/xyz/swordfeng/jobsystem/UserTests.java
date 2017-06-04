@@ -11,10 +11,8 @@ public class UserTests {
         DB.getInstance().reset();
         try {
             User.register("user1", "password", 0);
-        } catch (User.UserExist userExist) {
-            userExist.printStackTrace();
-        } catch (User.MoneyBelowZero moneyBelowZero) {
-            moneyBelowZero.printStackTrace();
+        } catch (User.UserExist | User.MoneyBelowZero e) {
+            e.printStackTrace();
         }
     }
     @Test
