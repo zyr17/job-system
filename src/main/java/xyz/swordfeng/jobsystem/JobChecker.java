@@ -1,6 +1,6 @@
 package xyz.swordfeng.jobsystem;
 
-public class JobChecker {
+public final class JobChecker {
     public static Job getCheckingJob(){
         int totalJobNum = Job.getNextId();
         for (int i = 0; i < totalJobNum; i ++ ){

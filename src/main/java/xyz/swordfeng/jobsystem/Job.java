@@ -6,7 +6,7 @@ package xyz.swordfeng.jobsystem;
 public final class Job extends DB.PersistentData {
 
     public static final String[] VALID_EDUCATION = new String[]{
-            "小学", "初中", "高中", "大学"
+            "Primary School", "Secondary School", "High School", "College"
     };
 
     public final String username;

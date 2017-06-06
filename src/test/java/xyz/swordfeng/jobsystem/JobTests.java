@@ -14,10 +14,8 @@ public class JobTests {
         DB.getInstance().reset();
         try {
             User.register("user1", "password", 0);
-        } catch (User.UserExist userExist) {
-            userExist.printStackTrace();
-        } catch (User.MoneyBelowZero moneyBelowZero) {
-            moneyBelowZero.printStackTrace();
+        } catch (User.UserExist | User.MoneyBelowZero e) {
+            e.printStackTrace();
         }
     }
     @Test
@@ -29,7 +27,7 @@ public class JobTests {
         String[] skills = new String[2];
         skills[0] = "Java";
         skills[1] = "Steam";
-        String education = "大学";
+        String education = "College";
         Job job = new Job(user, name, address, 10, skills, education);
         assertTrue("Create a job", username.equals(job.username) && job.getName().equals(name) &&
                     job.getAddress().equals(address) && job.getRequiredNumOfPeople() == 10 &&
@@ -44,7 +42,7 @@ public class JobTests {
         String[] skills = new String[2];
         skills[0] = "Java";
         skills[1] = "Steam";
-        String education = "大学";
+        String education = "College";
         Job job = new Job(user, name, address, 10, skills, education);
     }
     @Test(expected = ValidationError.class)
@@ -56,7 +54,7 @@ public class JobTests {
         String[] skills = new String[2];
         skills[0] = "Java";
         skills[1] = "Steam";
-        String education = "大学";
+        String education = "College";
         Job job = new Job(user, name, address, 10, skills, education);
     }
     @Test(expected = ValidationError.class)
@@ -68,7 +66,7 @@ public class JobTests {
         String[] skills = new String[2];
         skills[0] = "Java";
         skills[1] = "Steam";
-        String education = "大学";
+        String education = "College";
         Job job = new Job(user, name, address, 10, skills, education);
     }
     @Test(expected = ValidationError.class)
@@ -80,7 +78,7 @@ public class JobTests {
         String[] skills = new String[2];
         skills[0] = "Java";
         skills[1] = "Steam";
-        String education = "大学";
+        String education = "College";
         Job job = new Job(user, name, address, 10, skills, education);
     }
     @Test(expected = ValidationError.class)
@@ -92,7 +90,7 @@ public class JobTests {
         String[] skills = new String[2];
         skills[0] = "Java";
         skills[1] = "Steam";
-        String education = "大学";
+        String education = "College";
         Job job = new Job(user, name, address, 0, skills, education);
     }
     @Test(expected = ValidationError.class)
@@ -104,7 +102,7 @@ public class JobTests {
         String[] skills = new String[2];
         skills[0] = "Java";
         skills[1] = "Steam";
-        String education = "大学";
+        String education = "College";
         Job job = new Job(user, name, address, -1, skills, education);
     }
     @Test(expected = ValidationError.class)
@@ -114,7 +112,7 @@ public class JobTests {
         String name = "Programmer";
         String address = "China";
         String[] skills = new String[0];
-        String education = "大学";
+        String education = "College";
         Job job = new Job(user, name, address, 10, skills, education);
     }
     @Test(expected = ValidationError.class)
@@ -124,7 +122,7 @@ public class JobTests {
         String name = "Programmer";
         String address = "China";
         String[] skills = null;
-        String education = "大学";
+        String education = "College";
         Job job = new Job(user, name, address, 10, skills, education);
     }
     @Test(expected = ValidationError.class)
@@ -136,7 +134,7 @@ public class JobTests {
         String[] skills = new String[2];
         skills[0] = "Java";
         skills[1] = null;
-        String education = "大学";
+        String education = "College";
         Job job = new Job(user, name, address, 10, skills, education);
     }
     @Test
@@ -147,7 +145,7 @@ public class JobTests {
         String address = "China";
         String[] skills = new String[1];
         skills[0] = "";
-        String education = "大学";
+        String education = "College";
         Job job = new Job(user, name, address, 10, skills, education);
     }
     @Test(expected = ValidationError.class)
@@ -159,7 +157,7 @@ public class JobTests {
         String[] skills = new String[2];
         skills[0] = "Java";
         skills[1] = "";
-        String education = "大学";
+        String education = "College";
         Job job = new Job(user, name, address, 10, skills, education);
     }
     @Test(expected = ValidationError.class)
@@ -170,7 +168,7 @@ public class JobTests {
         String address = "China";
         String[] skills = new String[1];
         skills[0] = "averyveryveryverylongskill";
-        String education = "大学";
+        String education = "College";
         Job job = new Job(user, name, address, 10, skills, education);
     }
     @Test(expected = ValidationError.class)
@@ -181,7 +179,7 @@ public class JobTests {
         String address = "China";
         String[] skills = new String[1];
         skills[0] = "Java";
-        String education = "幼儿园";
+        String education = "kindergarten";
         Job job = new Job(user, name, address, 10, skills, education);
     }
 }

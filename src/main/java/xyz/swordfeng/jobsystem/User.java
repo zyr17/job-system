@@ -33,7 +33,6 @@ public final class User implements Serializable {
     }
     public static @NotNull User register(@NotNull String username, @NotNull String password, int money) throws UserExist, MoneyBelowZero {
         User user = new User(username, password, money);
-        user.password = password;
         synchronized (User.class) {
             if (DB.getInstance().get(username, User.class) == null) {
                 DB.getInstance().put(username, user);
